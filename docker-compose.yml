@@ -1,0 +1,36 @@
+version: '3.7'
+
+volumes:
+    postgres-data: {}
+
+services:
+    database:
+        container_name: apps-database
+        image: postgres:15.3-bullseye
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - '5435:5432'
+        expose:
+            - 5432
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_DB=postgres
+
+    backend:
+        image: apps-backend
+        container_name: apps-backend
+        env_file: ./apps/.env
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        volumes:
+            - ./apps:/apps
+            - ./docker-entrypoint.sh:/apps/docker-entrypoint.sh
+        ports:
+            - '3011:3000'
+        expose:
+            - 3000
+        depends_on:
+            - database

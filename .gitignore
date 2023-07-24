@@ -1,0 +1,33 @@
+# static_root/
+node_modules/
+media/
+
+__pycache__
+docs/_build
+_dist/
+.env
+.env.dev*
+.env.prod
+.env.production
+.DS_Store
+
+# yarn.lock
+# package-lock.json
+
+yarn-error.log
+env/
+lib
+bin
+plain.json
+__pycache__
+**/__pycache__
+
+logs/
+*.log
+*.pem
+
+docker-compose.local
+.venv
+static_root
+
+frontend/build
